@@ -18,6 +18,7 @@ package org.geekbang.thinking.in.spring.ioc.overview.domain;
 
 import org.geekbang.thinking.in.spring.ioc.overview.enums.City;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.support.ManagedList;
 import org.springframework.core.io.Resource;
 
 import javax.annotation.PostConstruct;
@@ -54,10 +55,36 @@ public class User implements BeanNameAware {
 
     private String contextAsText;
 
+    private static MyMergeListType<String> myMergeListType;
+
+    private ManagedList<String> managedList =new ManagedList<>();
+
+
+
+    @PostConstruct
+    public static void postConstruct (){
+        if(myMergeListType == null){
+            myMergeListType = new MyMergeListType<>();
+        }
+        myMergeListType.setMergeEnabled(true);
+    }
+
+    public ManagedList<String> getManagedList() {
+
+        return managedList;
+    }
+
+    public void setManagedList(ManagedList<String> managedList) {
+        this.managedList = managedList;
+    }
+
     /**
      * 当前 Bean 的名称
      */
     private transient String beanName;
+
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -122,6 +149,14 @@ public class User implements BeanNameAware {
         return user;
     }
 
+    public MyMergeListType<String> getMyMergeListType() {
+        return myMergeListType;
+    }
+
+    public void setMyMergeListType(MyMergeListType<String> myMergeListType) {
+        this.myMergeListType = myMergeListType;
+    }
+
     @PostConstruct
     public void init() {
         System.out.println("User Bean [" + beanName + "] 初始化...");
@@ -165,6 +200,7 @@ public class User implements BeanNameAware {
                 ", company=" + company +
                 ", context=" + context +
                 ", contextAsText='" + contextAsText + '\'' +
+                ", myMergeableListType=" + myMergeListType +
                 ", beanName='" + beanName + '\'' +
                 '}';
     }

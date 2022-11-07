@@ -19,6 +19,7 @@ package org.geekbang.thinking.in.spring.bean.lifecycle;
 import org.geekbang.thinking.in.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.EncodedResource;
@@ -32,7 +33,9 @@ import org.springframework.core.io.support.EncodedResource;
 public class MergedBeanDefinitionDemo {
 
     public static void main(String[] args) {
+        User.postConstruct();
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        beanFactory.addBeanPostProcessor(new CommonAnnotationBeanPostProcessor());
         // 基于 XML 资源 BeanDefinitionReader 实现
         XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
         String location = "META-INF/dependency-lookup-context.xml";
