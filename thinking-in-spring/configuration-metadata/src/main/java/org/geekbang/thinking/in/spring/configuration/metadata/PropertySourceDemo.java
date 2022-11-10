@@ -33,6 +33,7 @@ import java.util.Map;
  * @since
  */
 @PropertySource("classpath:/META-INF/user-bean-definitions.properties")
+@PropertySource("classpath:/META-INF/user-bean-definitions.properties")
 public class PropertySourceDemo {
 
     /**
