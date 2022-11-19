@@ -59,4 +59,6 @@ public class ObserverDemo {
             System.out.println("收到事件 ：" + eventObject);
         }
     }
+
+
 }
