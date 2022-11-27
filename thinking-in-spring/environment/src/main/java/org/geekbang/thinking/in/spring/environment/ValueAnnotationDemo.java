@@ -16,8 +16,10 @@
  */
 package org.geekbang.thinking.in.spring.environment;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.Environment;
 
 /**
  * {@link Value @Value} 注解示例
@@ -30,6 +32,9 @@ public class ValueAnnotationDemo {
 
     @Value("${user.name}")
     private String userName;
+
+    @Autowired
+    private Environment environment;
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();

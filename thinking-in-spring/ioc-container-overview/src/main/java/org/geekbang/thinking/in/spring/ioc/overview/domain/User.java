@@ -16,6 +16,8 @@
  */
 package org.geekbang.thinking.in.spring.ioc.overview.domain;
 
+import org.geekbang.thinking.in.spring.ioc.overview.dependency.injection.IgnoreDependencyImpl;
+import org.geekbang.thinking.in.spring.ioc.overview.dependency.injection.IgnoreDependencyService;
 import org.geekbang.thinking.in.spring.ioc.overview.enums.City;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.support.ManagedList;
@@ -56,6 +58,20 @@ public class User implements BeanNameAware {
     private String contextAsText;
 
     private static MyMergeListType<String> myMergeListType;
+
+    private IgnoreDependencyService ignoreDependency;
+
+    public IgnoreDependencyService getIgnoreDependency() {
+        return ignoreDependency;
+    }
+
+    public void setIgnoreDependency(IgnoreDependencyService ignoreDependency) {
+        this.ignoreDependency = ignoreDependency;
+    }
+
+    public String getBeanName() {
+        return beanName;
+    }
 
     private ManagedList<String> managedList =new ManagedList<>();
 
@@ -200,7 +216,8 @@ public class User implements BeanNameAware {
                 ", company=" + company +
                 ", context=" + context +
                 ", contextAsText='" + contextAsText + '\'' +
-                ", myMergeableListType=" + myMergeListType +
+                ", ignoreDependency=" + ignoreDependency +
+                ", managedList=" + managedList +
                 ", beanName='" + beanName + '\'' +
                 '}';
     }
