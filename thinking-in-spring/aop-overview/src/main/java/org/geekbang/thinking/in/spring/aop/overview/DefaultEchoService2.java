@@ -16,24 +16,30 @@
  */
 package org.geekbang.thinking.in.spring.aop.overview;
 
-import org.springframework.core.DecoratingProxy;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * Echo 服务
+ * 默认 {@link EchoService} 实现
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since
  */
-public interface EchoService extends DecoratingProxy {
+@Configuration // @Configuration 需要 @ComponentScan -> ConfigurationClassPostProcessor
+// CGLIB 代理对象
+public class DefaultEchoService2 implements EchoService {
 
-    String echo(String message) throws NullPointerException;
-
-    default String echo2(String message) {
-        return null;
+    @Override
+    public String echo(String message) {
+        return "[ECHO] " + message;
     }
 
     @Override
-    default Class<?> getDecoratedClass(){
-        return EchoService.class;
-    };
+    public String echo2(String message) {
+        return "[ECHO]2 " + message;
+    }
+
+    @Override
+    public Class<?> getDecoratedClass() {
+        return DefaultEchoService2.class;
+    }
 }

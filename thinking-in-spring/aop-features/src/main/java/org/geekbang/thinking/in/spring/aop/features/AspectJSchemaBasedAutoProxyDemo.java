@@ -16,7 +16,10 @@
  */
 package org.geekbang.thinking.in.spring.aop.features;
 
+import org.geekbang.thinking.in.spring.aop.overview.DefaultEchoService;
 import org.geekbang.thinking.in.spring.aop.overview.EchoService;
+import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -33,9 +36,18 @@ public class AspectJSchemaBasedAutoProxyDemo {
 
         context.refresh();
 
-        EchoService echoService = context.getBean("echoService", EchoService.class);
+        EchoService echoService = context.getBean("defaultEchoService", EchoService.class);
+
+        context.getBeansOfType(DefaultPointcutAdvisor.class);
+
+
+
+
 
         System.out.println(echoService.echo("Hello,World"));
+
+        System.out.println(echoService.echo2("Hello,World"));
+
 
         context.close();
     }

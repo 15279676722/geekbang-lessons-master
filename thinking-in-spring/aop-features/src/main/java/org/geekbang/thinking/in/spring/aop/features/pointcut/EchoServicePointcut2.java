@@ -14,43 +14,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geekbang.thinking.in.spring.aop.overview;
+package org.geekbang.thinking.in.spring.aop.features.pointcut;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.DecoratingProxy;
+import org.springframework.aop.support.StaticMethodMatcherPointcut;
 
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
- * 默认 {@link EchoService} 实现
- *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since
  */
-@Configuration // @Configuration 需要 @ComponentScan -> ConfigurationClassPostProcessor
-// CGLIB 代理对象
-public class DefaultEchoService implements EchoService {
+public class EchoServicePointcut2 extends StaticMethodMatcherPointcut {
 
-    @Override
-    public String echo(String message) {
-        return "[ECHO] " + message;
+    private String methodName;
+
+    private Class targetClass;
+
+    public EchoServicePointcut2(String methodName, Class targetClass) {
+        this.methodName = methodName;
+        this.targetClass = targetClass;
     }
 
     @Override
-    public String echo2(String message) {
-        return "[ECHO]2 " + message;
+    public boolean matches(Method method, Class<?> targetClass) {
+        return Objects.equals(methodName, method.getName())
+                && this.targetClass.isAssignableFrom(targetClass);
     }
 
-    public boolean equals(Object obj) {
-        return true;
+    public String getMethodName() {
+        return methodName;
     }
 
-    public int hashCode() {
-        return 1;
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
     }
 
-    @Override
-    public Class<?> getDecoratedClass() {
-        return DefaultEchoService.class;
+    public Class getTargetClass() {
+        return targetClass;
+    }
+
+    public void setTargetClass(Class targetClass) {
+        this.targetClass = targetClass;
     }
 }
