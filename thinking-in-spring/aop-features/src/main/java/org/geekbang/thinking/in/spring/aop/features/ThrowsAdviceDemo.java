@@ -43,11 +43,13 @@ public class ThrowsAdviceDemo {
 
     }
 
-    public void execute() {
+    public void execute() throws Exception {
+        System.out.println("Executing...");
         Random random = new Random();
         if (random.nextBoolean()) {
             throw new RuntimeException("For Purpose.");
+        }else {
+            throw new Exception("For Purpose.Exception");
         }
-        System.out.println("Executing...");
     }
 }

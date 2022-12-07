@@ -35,10 +35,14 @@ public class PointcutAPIDemo {
 
         EchoServicePointcut echoServicePointcut = new EchoServicePointcut("echo", EchoService.class);
 
+
         ComposablePointcut pointcut = new ComposablePointcut(EchoServiceEchoMethodPointcut.INSTANCE);
         // 组合实现
         pointcut.intersection(echoServicePointcut.getClassFilter());
+
+
         pointcut.intersection(echoServicePointcut.getMethodMatcher());
+
 
 
         // 将 Pointcut 适配成 Advisor

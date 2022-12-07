@@ -16,6 +16,7 @@
  */
 package org.geekbang.thinking.in.spring.aop.features.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
@@ -40,6 +41,7 @@ public class AspectConfiguration {
     @Around("anyPublicMethod()")         // Join Point 拦截动作
     public Object aroundAnyPublicMethod(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println("@Around any public method.");
+
         return pjp.proceed();
     }
 
@@ -47,19 +49,19 @@ public class AspectConfiguration {
     public void beforeAnyPublicMethod() throws Throwable {
         Random random = new Random();
 
-//        if (random.nextBoolean()) {
-//            throw new RuntimeException("For Purpose.");
-//        }
+        if (true) {
+            throw new RuntimeException("For Purpose.");
+        }
         System.out.println("@Before any public method.");
     }
 
 
     @After("anyPublicMethod()")
-    public void finalizeAnyPublicMethod() {
+    public void finalizeAnyPublicMethod(JoinPoint point) {
         System.out.println("@After any public method.");
     }
 
-    @AfterReturning("anyPublicMethod()")
+    @AfterReturning(value = "anyPublicMethod()",returning = "res")
     // AspectJAfterReturningAdvice is AfterReturningAdvice
     // 一个 AfterReturningAdviceInterceptor 关联一个 AfterReturningAdvice
     // Spring 封装 AfterReturningAdvice -> AfterReturningAdviceInterceptor
@@ -67,7 +69,7 @@ public class AspectConfiguration {
     // AfterReturningAdviceInterceptor
     //  -> AspectJAfterReturningAdvice
     //      -> AbstractAspectJAdvice#invokeAdviceMethodWithGivenArgs
-    public void afterAnyPublicMethod() {
+    public void afterAnyPublicMethod(JoinPoint point,Object res) {
         System.out.println("@AfterReturning any public method.");
     }
 

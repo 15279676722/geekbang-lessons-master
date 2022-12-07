@@ -29,6 +29,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
@@ -49,6 +50,11 @@ public class AspectJAnnotationUsingAPIDemo {
         proxyFactory.addAdvice(new MethodBeforeAdvice() {
             @Override
             public void before(Method method, Object[] args, Object target) throws Throwable {
+//                Random random = new Random();
+//
+//                if (random.nextBoolean()) {
+//                    throw new RuntimeException("For Purpose.");
+//                }
                 if ("put".equals(method.getName()) && args.length == 2) {
                     Object proxy = AopContext.currentProxy();
                     System.out.printf("[MethodBeforeAdvice] 当前存放是 Key: %s , Value : %s ，" +

@@ -22,14 +22,17 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ * 可以定义多种 exception的捕获方法
+ * 方法名要 afterThrowing开头 参数为1个或者4个
+ * 最后一个参数要是Throwable类型的
+ * 如果定义相同得Throwable类型会被覆盖
  * @since
  */
 public class MyThrowsAdvice implements ThrowsAdvice {
 
-//    public void afterThrowing(RuntimeException e) {
-//        System.out.printf("Exception : %s\n", e);
-//    }
+    public void afterThrowing(RuntimeException e) {
+        System.out.printf("Exception : %s\n", e);
+    }
 
     public void afterThrowing(Method method, Object[] args, Object target, Exception e) {
         System.out.printf("Method : %s , args : %s , target : %s, exception : %s\n",

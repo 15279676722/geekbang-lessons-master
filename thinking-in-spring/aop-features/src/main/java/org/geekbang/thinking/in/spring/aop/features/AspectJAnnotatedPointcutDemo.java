@@ -46,7 +46,8 @@ public class AspectJAnnotatedPointcutDemo {
         context.close();
     }
 
-    public void execute() {
+    public String execute() {
         System.out.println("execute()...");
+        return "execute()...";
     }
 }
