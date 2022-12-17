@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @EnableTransactionManagement
+@EnableAspectJAutoProxy(exposeProxy = true)
 @Configuration
 @ComponentScan(value = "org.geekbang.thinking.in.spring.aop.features.transactional"
 )
@@ -50,18 +51,19 @@ public class TransactionalDemo {
 
     @Bean
     @Conditional(value = MyCondition.class)
-    public PlatformTransactionManager dataSourceTransactionManager() {
+    public PlatformTransactionManager dataSourceTransactionManager(DataSource dataSource) {
         DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
-        transactionManager.setDataSource(getDriverManagerDataSource());
+        transactionManager.setDataSource(dataSource);
         return transactionManager;
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(getDriverManagerDataSource());
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
     }
 
-    private DataSource getDriverManagerDataSource() {
+    @Bean("dataSource")
+    public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/spring_jdbc");

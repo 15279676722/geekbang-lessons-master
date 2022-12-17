@@ -7,15 +7,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AccountDaoImpl implements AccountDao {
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	@Override
-	public void lessenBalance(int id, double balance) {
-		jdbcTemplate.update("update account set balance=balance-? where id=?",balance,id);
-	}
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-	@Override
-	public void addBalance(int id, double balance) {
-		jdbcTemplate.update("update account set balance=balance+? where id=?",balance,id);
-	}
+    @Override
+    public void lessenBalance(int id, double balance, String tableName) {
+        jdbcTemplate.update("update " + tableName + " set balance=balance-? where id=?", balance, id);
+    }
+
+    @Override
+    public void addBalance(int id, double balance, String tableName) {
+        jdbcTemplate.update("update " + tableName + " set balance=balance+? where id=?", balance, id);
+    }
 }
