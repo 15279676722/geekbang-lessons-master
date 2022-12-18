@@ -1,9 +1,11 @@
 package org.geekbang.thinking.in.spring.aop.features.transactional;
 
+import org.geekbang.thinking.in.spring.aop.features.adaptor.ExtendsAdaptor;
 import org.geekbang.thinking.in.spring.aop.features.condition.MyCondition;
 import org.geekbang.thinking.in.spring.aop.features.transactional.bean.TransactionalImpl;
 import org.geekbang.thinking.in.spring.aop.features.transactional.service.AccountService;
 import org.geekbang.thinking.in.spring.aop.features.transactional.service.impl.AccountServiceAnnoFailImpl;
+import org.springframework.aop.framework.adapter.*;
 import org.springframework.context.annotation.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -26,15 +28,24 @@ public class TransactionalDemo {
     public static void main(String[] args) throws Exception {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(TransactionalDemo.class);
+        context.register(ExtendsAdaptor.class);
         context.refresh();
         AccountService accService = context.getBean("accountServiceAnnoFailImpl", AccountService.class);
-        accService.accountBalance(1, 2, 500);
+        long l = System.currentTimeMillis();
+        try {
+            accService.accountBalance(1, 2, 500);
+
+        } catch (Exception e) {
+
+        } finally {
+            System.out.println(System.currentTimeMillis() - l);
+        }
 //        applyTransactional(beansOfType);
         context.close();
     }
 
     private static void applyTransactional(Map<String, AccountService> beansOfType) throws Exception {
-        for(String key:beansOfType.keySet()){
+        for (String key : beansOfType.keySet()) {
             AccountService accountService = beansOfType.get(key);
             if (accountService instanceof AccountServiceAnnoFailImpl) {
                 accountService.accountBalance(1, 2, 500);
@@ -63,14 +74,16 @@ public class TransactionalDemo {
     }
 
     @Bean("dataSource")
-    public DataSource dataSource() {
+    public DriverManagerDataSource driverManagerDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/spring_jdbc");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         return dataSource;
     }
+
+
 
 
 }

@@ -18,6 +18,12 @@ package org.geekbang.thinking.in.spring.bean.lifecycle;
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.core.type.AnnotatedTypeMetadata;
+
+import java.lang.annotation.Annotation;
 
 /**
  * 注解 BeanDefinition 解析示例
@@ -25,6 +31,7 @@ import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since
  */
+@Conditional(value = {MyConditional.class})
 public class AnnotatedBeanDefinitionParsingDemo {
 
     public static void main(String[] args) {
@@ -43,4 +50,6 @@ public class AnnotatedBeanDefinitionParsingDemo {
                 AnnotatedBeanDefinitionParsingDemo.class);
         System.out.println(demo);
     }
+
+
 }

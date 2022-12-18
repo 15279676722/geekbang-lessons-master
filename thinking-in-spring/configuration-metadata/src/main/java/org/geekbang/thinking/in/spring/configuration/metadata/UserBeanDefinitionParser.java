@@ -23,6 +23,8 @@ import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 /**
  * "user" 元素的 {@link BeanDefinitionParser} 实现
@@ -39,15 +41,13 @@ public class UserBeanDefinitionParser extends AbstractSingleBeanDefinitionParser
 
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-        setPropertyValue("id", element, builder);
-        setPropertyValue("name", element, builder);
-        setPropertyValue("city", element, builder);
-    }
-
-    private void setPropertyValue(String attributeName, Element element, BeanDefinitionBuilder builder) {
-        String attributeValue = element.getAttribute(attributeName);
-        if (StringUtils.hasText(attributeValue)) {
-            builder.addPropertyValue(attributeName, attributeValue); // -> <property name="" value=""/>
+        NamedNodeMap attributes = element.getAttributes();
+        int length = attributes.getLength();
+        for (int i = 0; i < length; i++) {
+            Node item = attributes.item(i);
+            String nodeValue = item.getNodeValue();
+            String nodeName = item.getNodeName();
+            builder.addPropertyValue(nodeName, nodeValue); // -> <property name="" value=""/>
 
         }
     }

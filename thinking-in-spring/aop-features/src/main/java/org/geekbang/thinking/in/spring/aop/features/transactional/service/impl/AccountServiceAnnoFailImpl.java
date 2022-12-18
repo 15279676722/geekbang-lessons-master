@@ -32,13 +32,17 @@ public class AccountServiceAnnoFailImpl implements AccountService {
 
         System.out.println(TransactionSynchronizationManager.getCurrentTransactionName());
 
-        this.transactionalFail(lessenId, addId, balance);
 
-//        AccountServiceAnnoFailImpl accountServiceAnnoFail = (AccountServiceAnnoFailImpl) AopContext.currentProxy();
-//        accountServiceAnnoFail.transactionalFail(lessenId, addId, balance);
+        AccountServiceAnnoFailImpl accountServiceAnnoFail = (AccountServiceAnnoFailImpl) AopContext.currentProxy();
+//        try {
+            accountServiceAnnoFail.transactionalFail(lessenId, addId, balance);
+
+//            }catch (Exception exception){
+//
+//        }
 
         //模拟出现异常
-//		int a=5/0;
+		int a=5/0;
         //IOException不会进行事务的回滚 只会回滚RunTimeException和Error 需要回滚可以加上参数rollbackFor
 //        throw new Exception();
 
@@ -55,7 +59,7 @@ public class AccountServiceAnnoFailImpl implements AccountService {
 
         //走个账号增加金额
         accountDao.addBalance(addId, balance, "account_new");
-        throw new IOException();
+//        throw new IOException();
     }
 
 }
