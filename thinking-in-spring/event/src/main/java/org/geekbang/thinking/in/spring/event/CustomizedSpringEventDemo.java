@@ -36,7 +36,6 @@ public class CustomizedSpringEventDemo {
         // MySpringEvent 以及它子孙类
         context.addApplicationListener(new MySpringEventListener());
 
-        context.addApplicationListener(new MyContextEvent());
 
         context.addApplicationListener(new ApplicationListener<ApplicationEvent>() {
 

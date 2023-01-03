@@ -37,7 +37,7 @@ public class AdvisedSupportListenerDemo {
         DefaultEchoService defaultEchoService = new DefaultEchoService();
         // 注入目标对象（被代理）
         ProxyFactory proxyFactory = new ProxyFactory(defaultEchoService);
-        proxyFactory.setTargetClass(DefaultEchoService.class);
+        proxyFactory.setInterfaces(EchoService.class);
         // 添加 Advice 实现 MethodInterceptor < Interceptor < Advice
         proxyFactory.addAdvice(new EchoServiceMethodInterceptor());
         proxyFactory.addListener(new AdvisedSupportListener() {
@@ -54,6 +54,7 @@ public class AdvisedSupportListenerDemo {
         // 获取代理对象
         // 激活事件触发 createAopProxy() <- getProxy()
         EchoService echoService = (EchoService) proxyFactory.getProxy();
+        System.out.println(echoService.echo("111"));
         proxyFactory.addAdvice(new Advice() {
         });
     }

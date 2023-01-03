@@ -42,6 +42,8 @@ public class InjectingApplicationEventPublisherDemo implements ApplicationEventP
     @Autowired
     private ApplicationContext applicationContext;
 
+
+
     @PostConstruct
     public void init() {
         //# 3
