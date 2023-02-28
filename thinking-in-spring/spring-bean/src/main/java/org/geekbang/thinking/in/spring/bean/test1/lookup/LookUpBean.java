@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LookUpBean {
     @Lookup
-    public BeanB beanB(){
+    BeanB beanB(){
         return null;
     }
 
