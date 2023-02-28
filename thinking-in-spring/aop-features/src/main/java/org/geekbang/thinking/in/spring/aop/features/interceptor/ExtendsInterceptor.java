@@ -13,6 +13,10 @@ public class ExtendsInterceptor implements MethodInterceptor {
         this.advice = advice;
     }
 
+    public ExtendsInterceptor() {
+
+    }
+
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
         this.advice.sys(methodInvocation.getMethod(),methodInvocation.getArguments(),methodInvocation.getThis());
