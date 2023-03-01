@@ -7,6 +7,10 @@ public class LookUpTest {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AnnotationConfig.class);
         LookUpBean bean = context.getBean(LookUpBean.class);
 
+        System.out.println(bean.getBeanB());
+        System.out.println(bean.getBeanB2());
+
+        System.out.println("-------------------");
         for (int i = 0; i < 10; i++) {
             bean.print();
         }
