@@ -6,64 +6,13 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-
+import javax.annotation.Resource;
+@Component
 public class LookUpBean {
 
     private BeanB beanB;
 
-    private BeanB beanB2;
 
-    private BeanB beanB3;
-
-    @Autowired
-    private BeanB beanB4;
-
-
-    @Lookup
-    BeanB beanB(){
-        return null;
-    }
-
-    public void print(){
-        System.out.println(this);
-        System.out.println(beanB());
-    }
-
-    @Autowired
-    public LookUpBean() {
-    }
-
-    @Autowired
-    public LookUpBean(BeanB beanB) {
-        this.beanB = beanB;
-    }
-
-
-    @Autowired
-    public LookUpBean(BeanB beanB, BeanB beanB2) {
-        this.beanB = beanB;
-        this.beanB2 = beanB2;
-    }
-
-    public BeanB getBeanB() {
-        return beanB;
-    }
-
-    public BeanB getBeanB2() {
-        return beanB2;
-    }
-
-    @PostConstruct
-    public void postConstruct(){
-    }
-    @PostConstruct
-    public void postConstruct2(){
-        MyMergeBeanPostProcessor.print();
-    }
-    @PostConstruct
-    public void postConstruct3(){
-        MyMergeBeanPostProcessor.print();
-    }
     @PreDestroy
     public void destroy(){
         MyMergeBeanPostProcessor.print();
@@ -75,5 +24,14 @@ public class LookUpBean {
     @PreDestroy
     public void destroy3(){
         MyMergeBeanPostProcessor.print();
+    }
+
+    @Autowired
+    public void setBeanB(BeanB beanB) {
+        this.beanB = beanB;
+    }
+
+    public BeanB getBeanB() {
+        return beanB;
     }
 }

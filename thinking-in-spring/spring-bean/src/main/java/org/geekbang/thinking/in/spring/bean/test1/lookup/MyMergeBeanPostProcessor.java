@@ -27,15 +27,7 @@ public class MyMergeBeanPostProcessor implements MergedBeanDefinitionPostProcess
     @Override
     public Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, String beanName) throws BeansException {
         print(beanName);
-        if (beanClass.isAssignableFrom(LookUpBean.class)) {
-            Constructor<?>[] constructor = new Constructor[1];
-            try {
-                constructor[0] = beanClass.getConstructor(BeanB.class, BeanB.class);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            }
-            return constructor;
-        }
+
         return null;
     }
 
