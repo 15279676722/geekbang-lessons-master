@@ -2,6 +2,7 @@ package org.geekbang.thinking.in.spring.bean.test1.lookup;
 
 
 import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,6 +16,11 @@ public class AnnotationConfig {
     @Bean
     public LazyInitTargetSourceCreator lazyInitTargetSourceCreator(){
         return new LazyInitTargetSourceCreator();
+    }
+
+    @Bean(autowire= Autowire.BY_TYPE)
+    public LookUpBean lookUpBean(){
+        return new LookUpBean();
     }
 
 }

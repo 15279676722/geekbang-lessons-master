@@ -7,14 +7,16 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-@Component
 public class LookUpBean {
 
     private BeanB beanB;
 
-    @Autowired
     private BeanB beanB2;
 
+    private BeanB beanB3;
+
+    @Autowired
+    private BeanB beanB4;
 
 
     @Lookup

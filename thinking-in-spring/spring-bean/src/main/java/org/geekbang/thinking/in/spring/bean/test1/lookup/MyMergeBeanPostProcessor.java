@@ -71,7 +71,7 @@ public class MyMergeBeanPostProcessor implements MergedBeanDefinitionPostProcess
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
         print(beanName);
-        return SmartInstantiationAwareBeanPostProcessor.super.postProcessAfterInstantiation(bean, beanName);
+        return true;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class MyMergeBeanPostProcessor implements MergedBeanDefinitionPostProcess
 
     @Override
     public int getOrder() {
-        return Ordered.LOWEST_PRECEDENCE - 3;
+        return 1 ;
     }
 
 
