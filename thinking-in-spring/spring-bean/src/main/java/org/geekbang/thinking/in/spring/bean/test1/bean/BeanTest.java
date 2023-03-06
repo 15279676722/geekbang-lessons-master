@@ -1,5 +1,6 @@
 package org.geekbang.thinking.in.spring.bean.test1.bean;
 
+import org.geekbang.thinking.in.spring.bean.test1.lookup.AnnotationConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

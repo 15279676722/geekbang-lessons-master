@@ -1,13 +1,14 @@
 package org.geekbang.thinking.in.spring.bean.test1.lookup;
 
+import org.geekbang.thinking.in.spring.bean.test1.annotation.MysqlResource;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Lookup;
-import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.List;
 
-public class LookUpBean {
+public class LookUpBean implements DisposableBean {
 
     private BeanB beanB;
 
@@ -18,6 +19,38 @@ public class LookUpBean {
     @Autowired
     private BeanB beanB4;
 
+    @MysqlResource(ids = "1")
+    private User user;
+
+    @MysqlResource(ids = {"1","2"})
+    private List<User> userList;
+
+
+
+    public BeanB getBeanB3() {
+        return beanB3;
+    }
+
+    public BeanB getBeanB4() {
+        return beanB4;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 
     @Lookup
     BeanB beanB(){
@@ -64,7 +97,6 @@ public class LookUpBean {
     public void postConstruct3(){
         MyMergeBeanPostProcessor.print();
     }
-    @PreDestroy
     public void destroy(){
         MyMergeBeanPostProcessor.print();
     }
@@ -72,8 +104,25 @@ public class LookUpBean {
     public void destroy2(){
         MyMergeBeanPostProcessor.print();
     }
-    @PreDestroy
+
     public void destroy3(){
         MyMergeBeanPostProcessor.print();
+    }
+
+
+    public void setBeanB(BeanB beanB) {
+        this.beanB = beanB;
+    }
+
+    public void setBeanB2(BeanB beanB2) {
+        this.beanB2 = beanB2;
+    }
+
+    public void setBeanB3(BeanB beanB3) {
+        this.beanB3 = beanB3;
+    }
+
+    public void setBeanB4(BeanB beanB4) {
+        this.beanB4 = beanB4;
     }
 }

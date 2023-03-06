@@ -6,6 +6,7 @@ public class LookUpTest {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AnnotationConfig.class);
         LookUpBean bean = context.getBean(LookUpBean.class);
+        System.out.println(bean.getUser());
 
         System.out.println(bean.getBeanB());
         System.out.println(bean.getBeanB2());
@@ -14,5 +15,6 @@ public class LookUpTest {
         for (int i = 0; i < 10; i++) {
             bean.print();
         }
+        context.close();
     }
 }

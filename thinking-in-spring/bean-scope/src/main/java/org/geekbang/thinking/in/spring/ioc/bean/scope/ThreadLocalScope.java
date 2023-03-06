@@ -17,7 +17,9 @@
 package org.geekbang.thinking.in.spring.ioc.bean.scope;
 
 import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.Scope;
+import org.springframework.beans.factory.support.DefaultSingletonBeanRegistry;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -33,6 +35,9 @@ import java.util.Map;
  */
 public class ThreadLocalScope implements Scope {
 
+
+    @Autowired
+    private DefaultSingletonBeanRegistry defaultSingletonBeanRegistry;
     public static final String SCOPE_NAME = "thread-local";
 
     private final NamedThreadLocal<Map<String, Object>> threadLocal = new NamedThreadLocal("thread-local-scope") {
