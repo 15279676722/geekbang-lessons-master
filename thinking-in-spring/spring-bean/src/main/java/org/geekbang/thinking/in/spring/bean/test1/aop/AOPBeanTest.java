@@ -7,5 +7,8 @@ public class AOPBeanTest {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AnnotationConfig.class);
 
         BeanA bean = context.getBean(BeanA.class);
+        bean.test2();
+
+        bean.test();
     }
 }
