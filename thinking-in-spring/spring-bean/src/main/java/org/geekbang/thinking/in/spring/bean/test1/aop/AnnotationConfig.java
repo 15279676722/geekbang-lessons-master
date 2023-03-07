@@ -11,16 +11,22 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @ComponentScan
-//@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy
 public class AnnotationConfig {
 
-    @Bean
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator(){
-        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-        return defaultAdvisorAutoProxyCreator;
-    }
-
-
-
+//    @Bean
+//    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator(){
+//        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+//        return defaultAdvisorAutoProxyCreator;
+//    }
+//
+//
+//    @Bean
+//    public BeanNameAutoProxyCreator beanNameAutoProxyCreator(){
+//        BeanNameAutoProxyCreator beanNameAutoProxyCreator = new BeanNameAutoProxyCreator();
+//        beanNameAutoProxyCreator.setBeanNames("beanA");
+//        beanNameAutoProxyCreator.setInterceptorNames("myInterceptor");
+//        return beanNameAutoProxyCreator;
+//    }
 
 }
