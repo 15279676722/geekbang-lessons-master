@@ -6,8 +6,8 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
-//@Aspect
-//@Component
+@Aspect
+@Component
 public class AspectJConfig {
     @Pointcut("execution(public void org.geekbang.thinking.in.spring.bean.test1.aop.BeanA.*(..))") // 匹配 Join Point
     public void aspectJ(){
